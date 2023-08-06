@@ -85,7 +85,7 @@ async def main():
         st.write("## Über WahlWeiser:")
         st.write('Dieses Projekt ist nur ein Experiment und erhebt keine Ansprüche auf Richtigkeit. Zur Bewertung der Aussagen wird die KI GPT-3.5-turbo von OpenAI verwendet. Die Bewertungen sind daher nicht unbedingt repräsentativ für die Parteien.')
         st.write('Die Eingegebenen Aussagen werden nicht gespeichert, jedoch für die Bewertung an OpenAI übermittelt. Gebe daher keine privaten Daten ein.')
-        st.write(f"Github: [JonasLoos/WahlWeiser](https://github.com/JonasLoos/WahlWeiser)")
+        st.write(f"Github: [Wahlweiser/WahlWeiser](https://github.com/Wahlweiser/WahlWeiser)")
 
 
 if __name__ == "__main__":
