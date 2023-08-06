@@ -47,6 +47,7 @@ async def evaluate(statement: str) -> Optional[int]:
 
 async def main():
     st.set_page_config(page_title='WahlWeiser', page_icon='logo.png')
+    st.markdown('<style>a[href="https://streamlit.io/cloud"] {display: none !important;}</style>', unsafe_allow_html=True)
     st.title("WahlWeiser")
     st.write("Welche Partei passt zu dir? Gebe eine Aussage ein und eine KI bewertet, wie gut diese Aussage zu den großen deutschen Parteien passt.")
 
@@ -84,7 +85,7 @@ async def main():
         st.empty()
         st.write("## Über WahlWeiser:")
         st.write('Dieses Projekt ist nur ein Experiment und erhebt keine Ansprüche auf Richtigkeit. Zur Bewertung der Aussagen wird die KI GPT-3.5-turbo von OpenAI verwendet. Die Bewertungen sind daher nicht unbedingt repräsentativ für die Parteien.')
-        st.write('Die Eingegebenen Aussagen werden nicht gespeichert, jedoch für die Bewertung an OpenAI übermittelt. Gebe daher keine privaten Daten ein.')
+        st.write('Diese Seite wird über die [Streamlit Community Cloud](https://streamlit.io/cloud) gehostet, die Eingegebenen Aussagen werden also auf Streamlit Servern verarbeitet und zur Bewertung an OpenAI übermittelt. Gebe daher keine privaten Daten ein.')
         st.write(f"Github: [Wahlweiser/WahlWeiser](https://github.com/Wahlweiser/WahlWeiser)")
 
 
