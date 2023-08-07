@@ -39,7 +39,8 @@ async def evaluate(statement: str) -> Optional[int]:
             ],
             temperature=0.0,
         )
-        print(response['choices'][0]['message']['content'])
+        response = response['choices'][0]['message']['content']
+        print(response)
         response = json.loads(response['choices'][0]['message']['content'])
         return response, None
     except Exception as e:
@@ -73,7 +74,7 @@ async def main():
             msg.error(f"Fehler bei der Bewertung ({type(error).__name__}). Bitte versuche es erneut.")
             with st.expander("Fehlermeldung anzeigen"):
                 st.write(f'{error}')
-                st.write(f'Response: {values}')
+                st.write(f'Response: `{values}`')
 
 
     with st.sidebar:
