@@ -29,6 +29,7 @@ Beispiel: {"CDU":50,"SPD":50,"Grüne":50,"FDP":50,"Linke":50,"AfD":50,}
 
 
 async def evaluate(statement: str) -> Optional[int]:
+    response = None
     try:
         response = await openai.ChatCompletion.acreate(
             model='gpt-3.5-turbo',
@@ -39,11 +40,11 @@ async def evaluate(statement: str) -> Optional[int]:
             temperature=0.0,
         )
         print(response['choices'][0]['message']['content'])
-        result = json.loads(response['choices'][0]['message']['content'])
-        return result, None
+        response = json.loads(response['choices'][0]['message']['content'])
+        return response, None
     except Exception as e:
         print(e)
-        return None, e
+        return response, e
 
 async def main():
     st.set_page_config(page_title='WahlWeiser', page_icon='logo.png')
@@ -59,18 +60,21 @@ async def main():
         msg.bar_chart(pd.DataFrame.from_dict(values, orient='index'))
 
     if statement := st.chat_input():
+        statement = statement.strip()
         msg = st.chat_message("")
         msg.write(f'**{statement}**')
         with st.spinner('Die KI denkt nach...'):
             values, error = await evaluate(statement)
-        if values:
+        if error is None:
             st.session_state.data[statement] = values
             print(values)
             msg.bar_chart(pd.DataFrame.from_dict(values, orient='index'))
         else:
             msg.error(f"Fehler bei der Bewertung ({type(error).__name__}). Bitte versuche es erneut.")
             with st.expander("Fehlermeldung anzeigen"):
-                st.write(str(error))
+                st.write(f'{error}')
+                st.write(f'Response: {values}')
+
 
     with st.sidebar:
         st.image('logo.png', width=50)
