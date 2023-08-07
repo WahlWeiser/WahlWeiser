@@ -41,7 +41,7 @@ async def evaluate(statement: str) -> Optional[int]:
         )
         response = response['choices'][0]['message']['content']
         print(response)
-        response = json.loads(response['choices'][0]['message']['content'])
+        response = json.loads(response)
         return response, None
     except Exception as e:
         print(e)
