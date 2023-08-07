@@ -40,10 +40,10 @@ async def evaluate(statement: str) -> Optional[int]:
         )
         print(response['choices'][0]['message']['content'])
         result = json.loads(response['choices'][0]['message']['content'])
-        return result
+        return result, None
     except Exception as e:
         print(e)
-    return None
+        return None, e
 
 async def main():
     st.set_page_config(page_title='WahlWeiser', page_icon='logo.png')
@@ -62,13 +62,13 @@ async def main():
         msg = st.chat_message("")
         msg.write(f'**{statement}**')
         with st.spinner('Die KI denkt nach...'):
-            values = await evaluate(statement)
+            values, error = await evaluate(statement)
         if values:
             st.session_state.data[statement] = values
             print(values)
             msg.bar_chart(pd.DataFrame.from_dict(values, orient='index'))
         else:
-            msg.write("Fehler bei der Bewertung. Bitte versuche es erneut.")
+            msg.error(f"Fehler bei der Bewertung ({type(error).__name__}. Bitte versuche es erneut.)")
 
     with st.sidebar:
         st.image('logo.png', width=50)
