@@ -24,7 +24,7 @@ parties_long = {
 SYSTEM_PROMPT = """
 Du bewertest, wie gut eine Aussage zu den deutschen politischen Partein CDU, SPD, Grüne, FDP, Linke, und AfD passt. Gebe je eine Prozentzahl an, wie sehr die Parteien der gegebenen Aussage zustimmen. Gebe die Antwort in JSON. Gebe nichts weiteres aus.
 
-Beispiel: {"CDU":50,"SPD":50,"Grüne":50,"FDP":50,"Linke":50,"AfD":50,}
+Beispiel: {"CDU":50,"SPD":50,"Grüne":50,"FDP":50,"Linke":50,"AfD":50}
 """
 
 
