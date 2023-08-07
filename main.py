@@ -68,7 +68,9 @@ async def main():
             print(values)
             msg.bar_chart(pd.DataFrame.from_dict(values, orient='index'))
         else:
-            msg.error(f"Fehler bei der Bewertung ({type(error).__name__}. Bitte versuche es erneut.)")
+            msg.error(f"Fehler bei der Bewertung ({type(error).__name__}). Bitte versuche es erneut.")
+            with st.expander("Fehlermeldung anzeigen"):
+                st.write(str(error))
 
     with st.sidebar:
         st.image('logo.png', width=50)
