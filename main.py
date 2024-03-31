@@ -41,7 +41,7 @@ async def evaluate(statement: str) -> Optional[int]:
             temperature = 0.0,
             response_format = { "type": "json_object" }
         )
-        response = completion.choices[0].message.content
+        response = response.choices[0].message.content
         print(response)
         response = json.loads(response)
         return response, None
