@@ -10,6 +10,7 @@ import json
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+openai_client = openai.AsyncOpenAI()
 
 
 parties = ["CDU", "SPD", "Grüne", "FDP", "Linke", "AfD"]
@@ -31,15 +32,16 @@ Beispiel: {"CDU":50,"SPD":50,"Grüne":50,"FDP":50,"Linke":50,"AfD":50}
 async def evaluate(statement: str) -> Optional[int]:
     response = None
     try:
-        response = await openai.ChatCompletion.acreate(
-            model='gpt-3.5-turbo',
-            messages=[
+        response = await openai_client.chat.completions.create(
+            model = 'gpt-3.5-turbo',
+            messages = [
                 {'role': 'system', 'content': SYSTEM_PROMPT},
                 {'role': 'user', 'content': statement},
             ],
-            temperature=0.0,
+            temperature = 0.0,
+            response_format = { "type": "json_object" }
         )
-        response = response['choices'][0]['message']['content']
+        response = completion.choices[0].message.content
         print(response)
         response = json.loads(response)
         return response, None

@@ -1,4 +1,5 @@
-openai
-numpy
-pandas
-streamlit
+openai==1.14
+numpy==1.26
+pandas==2.2
+streamlit==1.32
+
